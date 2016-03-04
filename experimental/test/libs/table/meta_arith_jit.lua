@@ -1,4 +1,10 @@
+-- Test whether correct arithmetic metamethods are called when calling
+-- multiple times (stress tests targeted to +jit).
+-- +__add +__sub +__mul +__div +__mod +__pow +__unm
 
+--- meta arith methods on operand2 in loop
+-- Check if the correct arithmetic metamethods are called, and if they
+-- are called on the correct operand2, inside a loop.
 do
   local t = {}
   local mt = {
@@ -20,6 +26,9 @@ do
   do local x = 0; for i=1,100 do x = x + (-t) end; assert(x == 1700); end
 end
 
+--- meta arith methods on operand1 in loop
+-- Check if the correct arithmetic metamethods are called, and if they
+-- are called on the correct operand1, inside a loop.
 do
   local t = {}
   local mt = {
@@ -39,6 +48,9 @@ do
   do local x = 0; for i=1,100 do x = t ^ x end; assert(x == 1600); end
 end
 
+--- meta arith methods on operand1 or 2 in loop
+-- Check if the correct arithmetic metamethods are called, and if both
+-- operands are passed correctly, inside a loop.
 do
   local t = {}
   local mt = {
@@ -58,6 +70,9 @@ do
   do local x = 0; for i=1,100 do x = t ^ t end; assert(x == 16); end
 end
 
+--- meta arith returns nil
+-- Check if the metamethod __add, if defined to return nil, actually
+-- returns nil.  
 do
   local t = {}
   local mt = { __add = function(a, b) end }
