@@ -91,7 +91,7 @@ do
   for i=1,100 do assert(t[i] == 100-i) end
 end
 
----
+--- if call fills table entry and index is pcall, indexing table sets values
 do
   local t = setmetatable({}, {
     __index = pcall, __newindex = rawset,
