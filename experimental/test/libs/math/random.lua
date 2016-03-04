@@ -1,7 +1,7 @@
-
 local random = math.random
 local randomseed = math.randomseed
 
+--- math.random is uniform and deterministic
 do
   local N = 1000
   local min, max = math.min, math.max
